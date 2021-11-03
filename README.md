@@ -1,4 +1,4 @@
-# Dimensão Calendario usando apache spark no databricks  <br />
+# Dimensão Calendario usando apache spark (databricks)  <br />
 
 ##Data de exemplo: 2021-01-01
 1. **SK_DATETIME**
