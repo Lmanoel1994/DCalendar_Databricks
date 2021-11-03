@@ -38,7 +38,7 @@
         - Exemplo:  'January'
         <br>
         
-9. USA_HOLYDAY
+9. USA_HOLIDAY
     - Campo onde informa se a data caiu em um feriado americano 
         - Exemplo: 1
         <br>
@@ -61,7 +61,7 @@
         - Exemplo: 'Janeiro'
        <br>
        
-14. BR_HOLYDAY
+14. BR_HOLIDAY
     - Campo onde informa se a data caiu em um feriado no brasileiro 
         - Exemplo: 1
 
@@ -119,8 +119,8 @@ dcalendar_schema = StructType([
   StructField('USA_DAY_OF_WEEK_NAME', StringType(), True),
   StructField('USA_MONTH_NAME', StringType(), True),
   StructField('WEEK_NUMBER', IntegerType(), True),
-  StructField('BR_HOLYDAY', StringType(), True),
-  StructField('USA_HOLYDAY', StringType(), True)])
+  StructField('BR_HOLIDAY', IntegerType(), True),
+  StructField('USA_HOLIDAY', IntegerType(), True)])
 ```
 ```python
 #Criando o dataframe
@@ -165,16 +165,16 @@ dcalendar_df = dcalendar_df.withColumn('BR_DATE_NAME',
 dcalendar_df = dcalendar_df.select(
     col('SK_DATETIME'),col('YEAR'),col('MONTH'),col('DAY').cast(IntegerType()),
     col('USA_DATE'),col('USA_DATE_NAME'),
-    col('USA_DAY_OF_WEEK_NAME'),col('USA_MONTH_NAME'),col('USA_HOLYDAY'),
+    col('USA_DAY_OF_WEEK_NAME'),col('USA_MONTH_NAME'),col('USA_HOLIDAY'),
     col('BR_DATE'),col('BR_DATE_NAME'),col('BR_DAY_OF_WEEK_NAME'),
-    col('BR_MONTH_NAME'),col('BR_HOLYDAY')
+    col('BR_MONTH_NAME'),col('BR_HOLIDAY')
 )
 ```
 ```python
 #Dataframe finalizado
 display(dcalendar_df.limit(10))
 ```
-SK_DATETIME|YEAR|MONTH|DAY|USA_DATE  |USA_DATE_NAME     |USA_DAY_OF_WEEK_NAME|USA_MONTH_NAME|USA_HOLYDAY|BR_DATE   |BR_DATE_NAME        |BR_DAY_OF_WEEK_NAME|BR_MONTH_NAME|BR_HOLYDAY|
+SK_DATETIME|YEAR|MONTH|DAY|USA_DATE  |USA_DATE_NAME     |USA_DAY_OF_WEEK_NAME|USA_MONTH_NAME|USA_HOLIDAY|BR_DATE   |BR_DATE_NAME        |BR_DAY_OF_WEEK_NAME|BR_MONTH_NAME|BR_HOLIDAY|
 ---------  |----|-----|---|----------|------------------|--------------------|--------------|-----------|----------|--------------------|-------------------|-------------|----------|
 20210101   |2021|1    |1  |2021-01-01|January 01, 2021  |Friday              |January       |1          |01-01-2021|01 Janeiro de 2021  |Sexta-feira        |Janeiro      |1         |
 20210102   |2021|1    |2  |2021-01-02|January 02, 2021  |Saturday            |January       |0          |02-01-2021|02 Janeiro de 2021  |Sabado             |Janeiro      |0         |
