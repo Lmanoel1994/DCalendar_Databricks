@@ -22,8 +22,8 @@
         - Exemplo: 53
         <br>
         
-6. USA_DATE
-    - Data completa no formato americano 
+6. DATE
+    - Data completa no formato padrão 
         - Exemplo: '2021-01-01
         <br>
         
@@ -119,7 +119,7 @@ for data in date_generated:
 #Criando o schema do dataframe
 dcalendar_schema = StructType([
   StructField('SK_DATETIME', StringType(), True),
-  StructField('USA_DATE', DateType(), True),
+  StructField('DATE', DateType(), True),
   StructField('BR_DATE', StringType(), True),
   StructField('YEAR', IntegerType(), True),
   StructField('MONTH', IntegerType(), True),
@@ -177,7 +177,7 @@ dcalendar_df = dcalendar_df.select(
     col('MONTH'),
     col('DAY').cast(IntegerType()),
     col('WEEK_NUMBER'),
-    col('USA_DATE'),
+    col('DATE'),
     col('USA_DATE_NAME'),
     col('USA_DAY_OF_WEEK_NAME'),
     col('USA_MONTH_NAME'),col('USA_HOLIDAY'),
