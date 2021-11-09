@@ -32,10 +32,6 @@
         - Exemplo:  'January 01, 2021'
         <br>
         
-7. USA_DAY_OF_WEEK_NAME
-    - Nome do dia da semana em ingles 
-        - Exemplo:  'Friday
-        <br>
         
 8. USA_MONTH_NAME
     - Nome do mes em ingles 
@@ -56,10 +52,7 @@
     - Data brasileira em string
       - Exemplo: '01 Janeiro de 2021'
       <br>
-      
-12. BR_DAY_OF_WEEK_NAME
-    - Nome do dia da semana em portugues 
-        - Exemplo: 'Sexta-feira'
+
 13. BR_MONTH_NAME
     - Nome do mes em portugues 
         - Exemplo: 'Janeiro'
