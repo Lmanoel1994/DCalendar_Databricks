@@ -22,14 +22,14 @@
         - Exemplo: 53
         <br>
         
-5. USA_DATE
+6. USA_DATE
     - Data completa no formato americano 
         - Exemplo: '2021-01-01
         <br>
         
-6. USA_DATE_NAME
-    - Data americana em string 
-        - Exemplo:  'January 01, 2021'
+7. USA_DAY_OF_WEEK_NAME
+    - Nome da semana em ingles
+        - Exemplo:  'Friday'
         <br>
         
         
@@ -48,9 +48,9 @@
         - Exemplo: '01-01-2021'
         <br>
         
-11. BR_DATE_NAME
-    - Data brasileira em string
-      - Exemplo: '01 Janeiro de 2021'
+11. BBR_DAY_OF_WEEK_NAME
+    - Nome da semana em português
+      - Exemplo: 'Sexta feira'
       <br>
 
 13. BR_MONTH_NAME
@@ -86,6 +86,19 @@ end = dt.datetime.strptime("2100-01-01", "%Y-%m-%d")
 date_generated = [start + dt.timedelta(days=x) for x in range(0, (end-start).days)]
 ```
 ```python
+# Meses em português
+month_br = {1:'Janeiro',2:'Fevereiro',3:'Marco',4:'Abril',5:'Maio',6:'Junho',
+            7:'Julho',8:'Agosto',9:'Setembro',10:'Outubro',11:'Novembro',12:'Dezembro'}
+```
+
+```python
+# Dia da semana em português
+week_br = {'Monday':'Segunda-feira','Tuesday':'Terça-feira','Wednesday':'Quarta-feira','Thursday':'Quinta-feira','Friday':'Sexta-feira','Saturday':'Sabado','Sunday':'Domingo'}
+```
+
+
+
+```python
 #Estruturando os dados do calendario
 list_dates = []
 for data in date_generated:
@@ -95,7 +108,6 @@ for data in date_generated:
                   data.year,
                   data.month,
                   data.strftime("%d"),
-                  data.strftime("%B %d, %Y"),
                   data.strftime("%A"),
                   data.strftime("%B"),
                   data.date().isocalendar()[1],
@@ -178,11 +190,11 @@ dcalendar_df = dcalendar_df.select(
 #Dataframe finalizado
 display(dcalendar_df.limit(10))
 ```
-SK_DATETIME|YEAR|MONTH|DAY| WEEK_NUMBER |USA_DATE  |USA_DATE_NAME     |USA_DAY_OF_WEEK_NAME|USA_MONTH_NAME|USA_HOLIDAY|BR_DATE   |BR_DATE_NAME        |BR_DAY_OF_WEEK_NAME|BR_MONTH_NAME|BR_HOLIDAY|
----------  |----|-----|---| ------------ |----------|------------------|--------------------|--------------|-----------|----------|--------------------|-------------------|-------------|----------|
-20210101   |2021|1    |1  |      53      |2021-01-01|January 01, 2021  |Friday              |January       |1          |01-01-2021|01 Janeiro de 2021  |Sexta-feira        |Janeiro      |1         |
-20210102   |2021|1    |2  |      53      |2021-01-02|January 02, 2021  |Saturday            |January       |0          |02-01-2021|02 Janeiro de 2021  |Sabado             |Janeiro      |0         |
-20210103   |2021|1    |3  |      53      |2021-01-03|January 03, 2021  |Sunday              |January       |0          |03-01-2021|03 Janeiro de 2021  |Segunda-feira      |Janeiro      |0         |
-20210104   |2021|1    |4  |       1      |2021-01-04|January 04, 2021  |Monday              |January       |0          |04-01-2021|04 Janeiro de 2021  |Domingo            |Janeiro      |0         |
-20210105   |2021|1    |5  |       1      |2021-01-05|January 05, 2021  |Tuesday             |January       |0          |05-01-2021|05 Janeiro de 2021  |Terca-Feira        |Janeiro      |0         |
+SK_DATETIME|YEAR|MONTH|DAY| WEEK_NUMBER |USA_DATE  |USA_DAY_OF_WEEK_NAME|USA_MONTH_NAME|USA_HOLIDAY|BR_DATE   |BR_DAY_OF_WEEK_NAME|BR_MONTH_NAME|BR_HOLIDAY|
+---------  |----|-----|---| ------------ |----------|--------------------|--------------|-----------|----------|-------------------|-------------|----------|
+20210101   |2021|1    |1  |      53      |2021-01-01|Friday              |January       |1          |01-01-2021|Sexta-feira        |Janeiro      |1         |
+20210102   |2021|1    |2  |      53      |2021-01-02|Saturday            |January       |0          |02-01-2021|Sabado             |Janeiro      |0         |
+20210103   |2021|1    |3  |      53      |2021-01-03|Sunday              |January       |0          |03-01-2021|Segunda-feira      |Janeiro      |0         |
+20210104   |2021|1    |4  |       1      |2021-01-04|Monday              |January       |0          |04-01-2021|Domingo            |Janeiro      |0         |
+20210105   |2021|1    |5  |       1      |2021-01-05|Tuesday             |January       |0          |05-01-2021|Terca-Feira        |Janeiro      |0         |
 
