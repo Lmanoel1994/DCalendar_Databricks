@@ -48,7 +48,7 @@
         - Exemplo: '01-01-2021'
         <br>
         
-11. BBR_DAY_OF_WEEK_NAME
+11. BR_DAY_OF_WEEK_NAME
     - Nome da semana em português
       - Exemplo: 'Sexta feira'
       <br>
@@ -70,7 +70,7 @@
 ```python
 #Import python
 import holidays
-import datetime as
+import datetime as dt
 ```
 ```python
 #Import pyspark
@@ -93,7 +93,8 @@ month_br = {1:'Janeiro',2:'Fevereiro',3:'Marco',4:'Abril',5:'Maio',6:'Junho',
 
 ```python
 # Dia da semana em português
-week_br = {'Monday':'Segunda-feira','Tuesday':'Terça-feira','Wednesday':'Quarta-feira','Thursday':'Quinta-feira','Friday':'Sexta-feira','Saturday':'Sabado','Sunday':'Domingo'}
+week_br = {'Monday':'Segunda-feira','Tuesday':'Terça-feira','Wednesday':'Quarta-feira',
+'Thursday':'Quinta-feira','Friday':'Sexta-feira','Saturday':'Sabado','Sunday':'Domingo'}
 ```
 
 
@@ -116,6 +117,11 @@ for data in date_generated:
     
 ```
 ```python
+#Traduzindo os meses de ingles para português
+dates = [day + (month_br[day[4]], week_br[day[6]]) for day in list_dates]
+```
+
+```python
 #Criando o schema do dataframe
 dcalendar_schema = StructType([
   StructField('SK_DATETIME', StringType(), True),
@@ -131,44 +137,12 @@ dcalendar_schema = StructType([
   StructField('BR_HOLIDAY', IntegerType(), True),
   StructField('USA_HOLIDAY', IntegerType(), True)])
 ```
+
 ```python
 #Criando o dataframe
 dcalendar_df = spark.createDataFrame(data = list_dates, schema = dcalendar_schema)
 ```
-```python
-#Gerando um nova coluna chamada 'BR_MONTH_NAME'que traduz os nomes dos meses para o portugues do Brasil
-dcalendar_df = dcalendar_df.withColumn(
-    'BR_MONTH_NAME', 
-    when(col('MONTH')=='01','Janeiro').
-    when(col('MONTH')=='02','Fevereiro').
-    when(col('MONTH')=='03','Marco').
-    when(col('MONTH')=='04','Abril').
-    when(col('MONTH')=='05','Maio').
-    when(col('MONTH')=='06','Junho').
-    when(col('MONTH')=='07','Julho').
-    when(col('MONTH')=='08','Agosto').
-    when(col('MONTH')=='09','Setembro').
-    when(col('MONTH')=='10','Outubro').
-    when(col('MONTH')=='11','Novembro').
-    when(col('MONTH')=='12','Dezembro').otherwise(col('MONTH')))
-```
-```python
-#Gerando um nova coluna chamada 'BR_DAY_OF_WEEK_NAME' que traduz os nomes dos dias para o portugues do Brasil
-dcalendar_df = dcalendar_df.withColumn(
-    'BR_DAY_OF_WEEK_NAME', 
-    when(col('USA_DAY_OF_WEEK_NAME')=='Sunday','Segunda-feira').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Tuesday','Terca-Feira').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Wednesday','Quarta-feira').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Thursday','Quinta-feira').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Friday','Sexta-feira').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Saturday','Sabado').
-    when(col('USA_DAY_OF_WEEK_NAME')=='Monday','Domingo').otherwise(col('USA_DAY_OF_WEEK_NAME')))
-```
-```python
-#Gerando um nova coluna chamada 'BR_DATE_NAME' que traduz os nomes das datas para o portugues do Brasil
-dcalendar_df = dcalendar_df.withColumn('BR_DATE_NAME',
-    concat(col('DAY'), lit(' '),col('BR_MONTH_NAME'),lit(' de '),col('YEAR')))
-```
+
 ```python
 #Ordenando as colunas 
 dcalendar_df = dcalendar_df.select(
